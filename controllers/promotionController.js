@@ -13,7 +13,7 @@ const validatePromotion = [
 
 module.exports = {
     get: (req, res) => {
-        if (req.user) res.render("promotion");
+        if (req.user && (!req.user.admin || !req.user.mem_status)) res.render("promotion", { user: req.user });
         else res.redirect("/");
     },
     post: [
@@ -21,7 +21,7 @@ module.exports = {
         async (req, res) => {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).render("promotion", {errors: errors.array()});
+                return res.status(400).render("promotion", {user: req.user, errors: errors.array()});
             } else {
                 const pass = req.body.role === "member" ? process.env.MEMBER_SECRET : process.env.ADMIN_SECRET;
                 if (req.body.password === pass) {
