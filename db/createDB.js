@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
     first_name VARCHAR( 255 ) NOT NULL,
     last_name VARCHAR( 255 ) NOT NULL,
     password VARCHAR( 255 ) NOT NULL,
-    mem_status BOOLEAN DEFAULT TRUE,
+    mem_status BOOLEAN DEFAULT FALSE,
     admin BOOLEAN DEFAULT FALSE
 );
 

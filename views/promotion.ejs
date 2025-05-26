@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promote to a Member or Admin</title>
+</head>
+<body>
+  <h1>Promote to a Member or Admin</h1>
+  <%- include("partials/errors.ejs") %>
+  <form action="/promotion" method="POST">
+    <input type="radio" id="member" name="role" value="member">
+    <label for="member">Member</label><br>
+    <input type="radio" id="admin" name="role" value="admin">
+    <label for="admin">Admin</label><br>
+    <label for="password">Password</label>
+    <input type="password" id="Password" name="password" required />
+    <button type="submit">Promote</button>
+  </form>
+</body>
+</html>

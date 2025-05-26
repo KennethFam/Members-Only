@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Members Club</title>
+</head>
+<body>
+    <h1>Messages</h1>
+    <% if (!user) { %>
+        <a href="/login">Log in</a><br>
+        <a href="/sign-up">Sign up</a>
+    <% } %>
+    <% if (user) { %>
+        <h2>Hello <%= user.username %>! </h2>
+        <a href="/new-message">New message</a><br>
+        <a href="/logout">Sign out</a>
+        <% if (!user.mem_status || !user.admin) { %> 
+            <br><a href="/promotion">Promote</a>
+        <% } %>
+    <% } %>
+
+    <ul>
+        <% for (const message of Object.values(messages)) { %>
+            <li>
+            <%- include('message', {message: message}); %>
+            <% if (user?.admin) { %>
+                <form METHOD="POST" action="/delete">
+                    <input type="hidden" name="id" value="<%= message.id %>">
+                    <button type="submit">Delete Message</button>
+                </form>
+            <% } %>
+            </li>
+        <% } %>
+    </ul>
+</body>
+</html>
