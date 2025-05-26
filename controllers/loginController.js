@@ -13,7 +13,8 @@ const validateUser = [
 
 module.exports = {
     get: (req, res) => {
-        res.render("login");
+        if (req.user) res.redirect("/");
+        else res.render("login");
     },
     post: passport.authenticate("local", {
         successRedirect: "/",

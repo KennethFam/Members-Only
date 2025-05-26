@@ -26,7 +26,8 @@ const validateUser = [
 
 module.exports = {
     get: (req, res) => {
-        res.render("signUp");
+        if (req.user) res.redirect("/");
+        else res.render("signUp");
     },
     post: [ 
         validateUser,
