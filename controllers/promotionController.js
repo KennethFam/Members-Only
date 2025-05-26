@@ -13,7 +13,8 @@ const validatePromotion = [
 
 module.exports = {
     get: (req, res) => {
-        res.render("promotion");
+        if (req.user) res.render("promotion");
+        else res.redirect("/");
     },
     post: [
         validatePromotion,

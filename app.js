@@ -29,5 +29,10 @@ app.use("/new-message", newMessageRouter);
 app.use("/promotion", promotionRouter);
 app.use("/delete", deleteMsgRouter);
 
+// error 404 handler
+app.use((req, res) => { res.status(404).send("Error 404. Page not found.") });
+// error handler
+app.use((err, req, res, next) => { res.status(500).send("Server error. Please try again.") });
+
 app.listen(3000, () => console.log("app listening on port 3000!"));
 
