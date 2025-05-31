@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db_setup": "NODE_ENV=DEV node db/createDB.js"
+    "db_setup": "NODE_ENV=DEV node db/createDB.js",
+    "start": "NODE_ENV=PROD node db/createDB.js && NODE_ENV=PROD node app.js"
   },
   "repository": {
     "type": "git",
