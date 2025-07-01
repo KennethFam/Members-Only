@@ -12,7 +12,7 @@
     <% } %>
     <% if (user) { %>
         <h2>Hello <%= user.username %>! </h2>
-        <a href="/new-message">New message</a><br>
+        <a href="/message">New message</a><br>
         <a href="/logout">Sign out</a>
         <% if (!user.mem_status || !user.admin) { %> 
             <br><a href="/promotion">Promote</a>
@@ -24,8 +24,7 @@
             <li>
             <%- include('message', {message: message}); %>
             <% if (user?.admin) { %>
-                <form METHOD="POST" action="/delete">
-                    <input type="hidden" name="id" value="<%= message.id %>">
+                <form METHOD="POST" action="/message/<%= message.id %>?_method=DELETE">
                     <button type="submit">Delete Message</button>
                 </form>
             <% } %>

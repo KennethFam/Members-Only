@@ -20,7 +20,20 @@ async function getMessagesWithoutData() {
 }
 
 async function getMessagesWithData() {
-    const { rows } = await pool.query("SELECT * FROM messages JOIN users ON messages.user_id = users.id ORDER BY created ASC");
+    // we need to specify messages.id here otherwise the merge will overwrite it with user.id since both columns have the same name
+    console.log("here");
+    const { rows } = await pool.query(`
+        SELECT  
+            messages.id,
+            messages.msg,
+            messages.created,
+            users.username,
+            users.first_name,
+            users.last_name
+        FROM messages 
+        JOIN users ON messages.user_id = users.id 
+        ORDER BY created ASC
+    `);
     return rows;
 }
 
@@ -37,7 +50,8 @@ async function promoteToAdmin(user) {
 }
 
 async function deleteMsg(id) {
-    await pool.query("DELETE FROM messages WHERE id=$1", [id]);
+    const result = await pool.query("DELETE FROM messages WHERE id=$1", [id]);
+    console.log(id)
 }
 
 module.exports = {
