@@ -21,7 +21,6 @@ async function getMessagesWithoutData() {
 
 async function getMessagesWithData() {
     // we need to specify messages.id here otherwise the merge will overwrite it with user.id since both columns have the same name
-    console.log("here");
     const { rows } = await pool.query(`
         SELECT  
             messages.id,
@@ -51,7 +50,6 @@ async function promoteToAdmin(user) {
 
 async function deleteMsg(id) {
     const result = await pool.query("DELETE FROM messages WHERE id=$1", [id]);
-    console.log(id)
 }
 
 module.exports = {

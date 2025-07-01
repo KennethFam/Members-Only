@@ -28,9 +28,6 @@ module.exports = {
         }
     ],
     delete: async (req, res) => {
-        console.log(typeof req.params.msgId)
-        console.log(typeof Number(req.params.msgId))
-        console.log(req.params.msgId)
         if (req.user?.admin) await db.deleteMsg(req.params.msgId);
         res.redirect("/");
     }
